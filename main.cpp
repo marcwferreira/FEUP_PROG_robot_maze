@@ -1,3 +1,5 @@
+//T09_G12
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -7,27 +9,28 @@ using namespace std;
 //Function for the main menu returns the option chosen by the user
 int game_start() {
     // variable to store the user input
-    int option;
+    char option;
 
     //shows the menu
     cout << "1) Rules;" << endl << "2) Play;" << endl << "0) Exit" << endl;
 
-    //asks repeatedly for an option only accpeting 1, 2 or 0
+    //asks repeatedly for an option only accepting 1, 2 or 0
     do {
         cin >> option;
-        if (option != 0 & option != 1 & option != 2) {
+        if (option != '0' & option != '1' & option != '2') {
             cout << "Input not valid, please try again." << endl;
         }
-    } while (option != 0 & option != 1 & option != 2);
+    } while (option != '0' & option != '1' & option != '2');
     return option;
 }
 
 bool teste(int maze_num) {
-
+    
     bool flag = false;
 
     string maze;
 
+    //select maze txt file
     if (maze_num < 10) {
         maze = "Maze_0" + to_string(maze_num) + ".TXT";
     }
@@ -51,6 +54,7 @@ void maze(int maze_num, int &player_line, int &player_col) {
 
     string maze;
 
+    //select maze txt file
     if (maze_num < 10) {
         maze = "Maze_0" + to_string(maze_num) + ".TXT";
     }
@@ -86,7 +90,7 @@ void maze(int maze_num, int &player_line, int &player_col) {
     }
 
     //estava a tentar criar uma matriz para guardar as posições dos objetos mas ainda não consegui 
-    while (getline(mazefile,line)) {
+    while (getline(mazefile,line)) { 
         for (int i = 0; i < l; i++) {
             for (int j = 0; j < c; j++) {
                 pos[i][j] = line[i];
@@ -97,6 +101,8 @@ void maze(int maze_num, int &player_line, int &player_col) {
             }
         }
     }
+
+    //close maze file
     mazefile.close();
 
     //Return to main menu
@@ -106,11 +112,10 @@ void maze(int maze_num, int &player_line, int &player_col) {
 }
 
 void moves() {
-    char x;
+    char player_move;
 
     cout << endl << "Where do you want to go?" << endl;
-    cin >> x;
-
+    cin >> player_move;
 
 }
 
@@ -126,6 +131,8 @@ void play(int maze_num) {
     moves();
 }
 
+//main
+
 int main() {
 
     // variables user input and chosen maze
@@ -135,11 +142,11 @@ int main() {
     //actions regarding the option chose by the user
 
     //rules
-    if (option == 1) {
+    if (option == '1') {
         cout << "The rules are: ";
     }
     //Play the game
-    else if (option == 2) {
+    else if (option == '2') {
 
         cout << "Here we go!" << endl << "Choose the maze: ";
         //Choose an available maze
@@ -154,6 +161,10 @@ int main() {
         else {
             cout << "Bye!";
         }
+    }
+    //Quit
+    else if (option == '0'){
+        return 0;
     }
 
 }
