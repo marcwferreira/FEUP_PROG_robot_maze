@@ -5,37 +5,66 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <iterator>
 
 using namespace std;
 
-int x,y;
+int main() {
 
-const int maze_height = 10;
-const int maze_lenght = 10;
+    int count = -1;
 
-//load the txt file in an array of strings
-string array[maze_height][maze_lenght]; //for now is 10x10, we have to change to d.
+    int playerx, playery;
 
-while (getline(mazefile,line)) {
-        for (int i = 0; i < l; i++) {
-            for (int j = 0; j < c; j++) {
-                pos[i][j] = line[i];
-                if (line[i] == 'H') {
-                    player_line = i;
-                    player_col = j;
-                }
-            }
+    ifstream mazefile;
+    mazefile.open("maze_01.txt");
+
+    //linhas ficheiro
+    string line;
+    int posx, posy;
+
+    while (getline(mazefile, line)) {
+        cout << line << endl;
+        if (count == 0) {
+            posx = line.length();
         }
+
+        count++;
+
     }
     mazefile.close();
 
+    posy = count + 1;
 
+    char maze_map[posy][posx];
 
-//storing the map
+     mazefile.open("maze_01.txt");
 
-for(x = 0; x < maze_lenght, x++){
-    for(y =0; y < maze_height, y++){
-        cout << array[x][y]<<" ";
+    int count2 = 0; //counting the lines
+
+    while(getline(mazefile,line)){
+        for(int i=0; i < posx; i++){
+            maze_map[count2][i] = line[i];
+        }
+        count2++;
     }
-    cout << endl;
+
+    cout << "test" << endl;
+
+    for(int i=0;i<posy;i++){
+        for(int j=0;j<posx;j++){
+            cout << maze_map[i][j] << endl;
+
+            if(maze_map[i][j] == 'H'){
+                playerx = j;
+                playery = i;
+            }
+        }
+    }
+
+    cout << "x y:" << playerx << " " << playery << endl;
+
+
+
+    return 0;
 }
