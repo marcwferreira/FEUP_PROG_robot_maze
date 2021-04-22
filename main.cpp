@@ -24,6 +24,7 @@ int game_start() {
     return option;
 }
 
+//Test if the maze exists in the files
 bool teste(int maze_num) {
     
     bool flag = false;
@@ -47,6 +48,7 @@ bool teste(int maze_num) {
     return flag;
 }
 
+//load maze in the console
 void maze(int maze_num, int &player_line, int &player_col) {
 
     string player;
@@ -111,6 +113,7 @@ void maze(int maze_num, int &player_line, int &player_col) {
     }
 }
 
+//player movement
 void moves() {
     char player_move;
 
