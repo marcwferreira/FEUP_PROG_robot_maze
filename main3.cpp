@@ -280,11 +280,13 @@ void robot_move(int i,game_info &gameplay){
         change_x = 1;
     }
 
-    //make the robot move
+    //MAKE THE ROBOTS MOVE
+    //robot catches player and player
     if(gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] == 'H'){
         gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] = 'h';
         gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] = ' ';
     }
+    //robot dies in fence
     else if(gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] == '*'){
         gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] = 'r';
         gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] = ' ';
@@ -292,6 +294,7 @@ void robot_move(int i,game_info &gameplay){
         gameplay.robot_info[i][2] = gameplay.robot_info[i][2]+change_x;
         //gameplay.robot_info[i][0] = 0;
     }
+    //robot colides with another and both get stuck
     else if(gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] == 'R'){
         gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] = 'r';
         gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] = ' ';
@@ -299,6 +302,7 @@ void robot_move(int i,game_info &gameplay){
         gameplay.robot_info[i][2] = gameplay.robot_info[i][2]+change_x;
         //gameplay.robot_info[i][0] = 0;
     }
+    //got colides with stuck robot and get stuck
     else if(gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] == 'r'){
         gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] = 'r';
         gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] = ' ';
@@ -306,6 +310,7 @@ void robot_move(int i,game_info &gameplay){
         gameplay.robot_info[i][2] = gameplay.robot_info[i][2]+change_x;
         //gameplay.robot_info[i][0] = 0;
     }
+    //robots move normally
     else{
         gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] = 'R';
         gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] = ' ';
