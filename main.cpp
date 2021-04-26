@@ -23,11 +23,12 @@ struct game_info{
 int game_start() {
 
     //options choice
-    const char rules = '0';
-    const char play_game = '1';
-    const char exit = '2';
+    const string rules = "1";
+    const string play_game = "2";
+    const string exit = "0";
     
-    char option;//variable to store the user input
+    string option;//variable to store the user input
+    int option_selected;//convert string into int
 
     string title_line;//for title screen
 
@@ -49,44 +50,72 @@ int game_start() {
     //asks repeatedly for an option only accepting 1, 2 or 0 (rules, play, quit)
     do {
         std::cin >> option;
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         if (option != rules & option != play_game & option != exit) {
             cout << "Input not valid, please try again." << endl;
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         }
     } while (option != rules & option != play_game & option != exit);
-    return option;
+
+    //convert option into int
+    option_selected = stoi(option);
+
+    return option_selected;
+}
+
+//makes the maze file name
+string maze_name(int maze_num, bool winner_file){
+
+    const int maze_num_check = 10; //used to check if maze has a number lower than 10
+
+    string maze;
+
+    //select maze txt file
+    if(winner_file == true){
+        //select maze txt file for the winners
+        if (maze_num < maze_num_check) {
+            maze = "Maze_0" + to_string(maze_num) + "_WINNERS.TXT";
+        }
+        else {
+            maze = "Maze_" + to_string(maze_num) + "_WINNERS.TXT";
+        }
+    }
+    else{
+        if (maze_num < maze_num_check) {
+            maze = "Maze_0" + to_string(maze_num) + ".TXT";
+        }
+        else {
+            maze = "Maze_" + to_string(maze_num) + ".TXT";
+        }
+    }
+
+    return maze;
 }
 
 //Test if the maze exists in the files
 bool teste(int maze_num) {
 
-    const int maze_num_check = 10; //used to check if maze has a number lower than 10
+    const bool game_file = false;//indicates that this will name a maze file and not a winner file
     
-    bool flag = false;
+    bool flag_no_map = false;
 
     string maze;
 
-    //select maze txt file
-    if (maze_num < maze_num_check) {
-        maze = "Maze_0" + to_string(maze_num) + ".TXT";
-    }
-    else {
-        maze = "Maze_" + to_string(maze_num) + ".TXT";
-    }
+    maze = maze_name(maze_num, game_file);
 
     ifstream mazefile;
     mazefile.open(maze);
     if (mazefile.fail()) {
-        flag = true;
+        flag_no_map = true;
     }
 
-    return flag;
+    return flag_no_map;
 }
 
 //Load maze in the console
 void maze(int maze_num,game_info &gameplay) {
 
-    const int maze_num_check = 10; //used to check if maze has a number lower than 10
+    const bool game_file = false;//indicates that this is a maze file and not a winner file
     const int invalid_maze_num = 0;
     const char alive_player = 'H';
     const char alive_robot = 'R';
@@ -94,12 +123,7 @@ void maze(int maze_num,game_info &gameplay) {
     string maze_select;
 
     //select maze txt file
-    if (maze_num < maze_num_check) {
-        maze_select = "MAZE_0" + to_string(maze_num) + ".TXT";
-    }
-    else {
-        maze_select = "MAZE_" + to_string(maze_num) + ".TXT";
-    }
+    maze_select = maze_name(maze_num, game_file);
 
     ifstream mazefile;
     mazefile.open(maze_select);
@@ -129,6 +153,14 @@ void maze(int maze_num,game_info &gameplay) {
         } mazefile.close();
 
     }
+
+    //clearing vectors and preparing then to be resized (in the case player wants to replay)
+    gameplay.maze_map.clear();
+    gameplay.maze_map.shrink_to_fit();
+    gameplay.player_pos.clear();
+    gameplay.player_pos.shrink_to_fit();
+    gameplay.robot_info.clear();
+    gameplay.robot_info.shrink_to_fit();
 
     //resizing the vector in gameplay to appropriate size
     gameplay.maze_map.resize(pos_y,vector<char>(pos_x));
@@ -188,9 +220,9 @@ void print_maze(game_info &gameplay){
 
     for(int i=0;i<gameplay.maze_map.size();i++){
         for(int j=0;j<gameplay.maze_map[i].size();j++){
-            cout << gameplay.maze_map[i][j];           
+            printf("%c",gameplay.maze_map[i][j]);
         }
-        cout << endl;
+        printf("\n");
     }
 }
 
@@ -363,7 +395,7 @@ void robot_move(int i,game_info &gameplay){
 }
 
 //Run the functions while playing the game
-int play(int &maze_num,game_info &gameplay) {
+int play(int maze_num,game_info &gameplay) {
 
     //defining constants
     const char dead_player = 'h';
@@ -406,12 +438,13 @@ int play(int &maze_num,game_info &gameplay) {
             else{
                 robot_move(i, gameplay);   //robots movement
             }
-
+            
             //checks if the player died after the robot movement and exit their movements
             if(gameplay.maze_map[gameplay.player_pos[0]][gameplay.player_pos[1]] == dead_player){
                 break; //break the for loop (player movement and robots movement)
             }
 
+            
             //tests if all robots are dead (player victory)
             if(gameplay.robots_dead == gameplay.robot_info.size()){
                 break; //break the for loop
@@ -453,62 +486,150 @@ int play(int &maze_num,game_info &gameplay) {
 }
 
 //Player won - keep the time of his game
-void player_won(int game_time){
+void player_win(int game_time, int maze_num){
     cout << "this was your time: " << game_time << endl;
     //TO BE IMPLEMENTED
-    int a;
-    cin >> a;
+
+    const bool winner_file = true;//indicates that the file should be named with _WINNERS at the end
+
+    string maze_select = maze_name(maze_num, winner_file);
+
+    ifstream mazefile;
+    mazefile.open(maze_select);
+
+     if(!mazefile.is_open()){
+        //create a file
+    }
+    else{
+        //store and organize winners
+       
+
+    
+        mazefile.close();
+
+    }
 }
 
 //Main
 int main() {
 
     //opttions choice
-    const char rules = '1';
-    const char play_game = '2';
-    const char exit = '0';
-    const char time_fail = 0;
+    const int rules = 1;
+    const int play_game = 2;
+    const int exit = 0;
+    const int time_fail = 0;
+    const string no_playing = "0";
+    const string yes_playing = "1";
 
-    // variables user input and chosen maze
-    int option = game_start();
-    int maze_num;
+    //keep the loop for the player to play again
+    string keep_playing;
+    string rules_read;
 
     //variables to map the maze,player and robots
+    int maze_num;
+    bool maze_not_exist; 
     char maze_map;
     int gameplay_time;
 
     //variable for game mapping
     game_info gameplay;
 
-    //ACTIONS REGARDING THE OPTION CHOSE BY THE USER
+    do{
+         int option = game_start();//ask what the player wants to do
 
-    //rules
-    if (option == rules) {
-        cout << "The rules are: "; //to be written
-    }
-    //Play the game
-    else if (option == play_game) {
+        //ACTIONS REGARDING THE OPTION CHOSE BY THE USER
 
-        cout << "Here we go!" << endl << "Choose the maze: ";
-        //Choose an available maze
-        do {
-            std::cin >> maze_num;
-        } while (maze_num != 01 & teste(maze_num)); //test if the maze exists
+        //rules
+        if (option == rules) {
+            //show the rules
+            ifstream rules_file;
+            rules_file.open("RULES.TXT");
+            if(!rules_file.is_open()){
+                cout << "Rules:" << endl; //write the rules
+                cout << "Your objective is to survive inside the maze while robots chase you" << endl;
+                cout << "You win the game if all robots are destroyed and you are still alive" << endl;
+                cout << "'H' is your character" << endl;
+                cout << "'h' is your character if you die (game over)" << endl;
+                cout << "'*' is electric walls, if you hit then you die" << endl;
+                cout << "'R' is an alive robot, they will chase you, you die if you touch them" << endl;
+                cout << "'r' is a destroyed robot, you cannot walk over them" << endl;
+                cout << "Robots are destroyed when they hit a fence or another robot (alive or destroyed)" << endl;
+                cout << "The game works in rounds, you make a movement then the robots" << endl;
+                cout << "Here is a list of possible movements in a round: " << endl;
+                cout << "'q' or 'Q' : walk up-left (diagonal)" << endl;
+                cout << "'w' or 'W' : walk up" << endl;
+                cout << "'e' or 'E' : walk up-right (diagonal)" << endl;
+                cout << "'a' or 'A' : walk left" << endl;
+                cout << "'s' or 'S' : stay in place (no movement)" << endl;
+                cout << "'d' or 'D' : walk right" << endl;
+                cout << "'z' or 'Z' : walk down-left (diagonal)" << endl;
+                cout << "'x' or 'X' - walk down" << endl;
+                cout << "'c' or 'C' - walk down-right (diagonal)" << endl << endl;
+                cout << "There is also time scores for people that win the game" << endl;
+                cout << "Good Luck!" << endl << endl;
+                cout << "Do you wish to got back to main menu or close the game?" << endl;
+                cout << "1- MAIN MENU" << endl << "0- EXIT" << endl;
+                cout << "please select you option:" ;
+            }
+            else{
+                while (getline(rules_file, rules_read)) {
+                    cout << rules_read << endl;
+                } 
+                rules_file.close();
+            }
+            //ask player to go to main menu
+            do{
+                cin >> keep_playing;
+                if(keep_playing != no_playing && keep_playing != yes_playing){
+                    cout << "Please select a valid option (1- MAIN MENU or 0- EXIT): ";
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                }
+            }while(keep_playing != no_playing & keep_playing != yes_playing);
+        }
+        //Play the game
+        else if (option == play_game) {
 
-        if (maze_num != 0) {
-            gameplay_time = play(maze_num, gameplay);
-            if(gameplay_time != time_fail){
-                player_won(gameplay_time);//calls the function to store players time
+            cout << "Here we go!" << endl << "Choose the maze number: ";
+            //Choose an available maze
+            do{
+                std::cin >> maze_num;
+                maze_not_exist = teste(maze_num); //test if maze exist
+                if(cin.fail() || maze_not_exist){
+                    cout << "Not a valid inut or maze doens't exist" << endl;
+                    cout << "please choose the maze number: ";
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                }
+            }while( cin.fail() || maze_not_exist);
+                
+
+            if (maze_num != 0) {
+                gameplay_time = play(maze_num, gameplay);
+                if(gameplay_time != time_fail){
+                    player_win(gameplay_time, maze_num);//calls the function to store players time
+                }
+                cout << "Do you want to play again?" << endl;
+                cout << "1- YES" << endl << "0- NO" << endl;
+                cout << "Please select an option: ";
+                do{
+                    cin >> keep_playing;
+                    if(keep_playing != no_playing && keep_playing != yes_playing){
+                        cout << "Please select a valid option (1- YES or 0- NO): ";
+                        cin.clear();
+                        cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                    }
+                }while(keep_playing != no_playing && keep_playing != yes_playing);
+            }
+            //Exit
+            else {
+                cout << "Bye!";
             }
         }
-        // Exit
-        else {
-            cout << "Bye!";
+        //Exit
+        else if (option == exit){
+            return 0;
         }
-    }
-    //Quit
-    else if (option == exit){
-        return 0;
-    }
+    }while(keep_playing == yes_playing);
     
 }

@@ -1,0 +1,38 @@
+*******************************************************************************
+*                                                                             *
+*                                   RULES:                                    *
+*                                                                             *
+*     Your objective is to survive inside the maze while robots chase you     *
+*    You win the game if all robots are destroyed and you are still alive     *
+*                                                                             *
+*                            'H' is your character                            *
+*               'h' is your character if you die (game over)                  *
+*               '*' is electric walls, if you hit then you die                *
+*    'R' is an alive robot, they will chase you, you die if you touch them    *
+*             'r' is a destroyed robot, you cannot walk over them             *
+*                                                                             *
+*                Robots are destroyed when they hit a fence or                *
+*                     another robot (alive or destroyed)                      *
+*                                                                             *
+*        The game works in rounds, you make a movement then the robots        *
+*                                                                             *
+*              Here is a list of possible movements in a round:               *
+*                    'q' or 'Q' : walk up-left (diagonal)                     *
+*                            'w' or 'W' : walk up                             *
+*                    'e' or 'E' : walk up-right (diagonal)                    *
+*                            'a' or 'A' : walk left                           *
+*                    's' or 'S' : stay in place (no movement)                 *
+*                            'd' or 'D' : walk right                          *
+*                    'z' or 'Z' : walk down-left (diagonal)                   *
+*                            'x' or 'X' - walk down                           *
+*                    'c' or 'C' - walk down-right (diagonal)                  *
+*                                                                             *
+*              There is time scores for people that win the game              *
+*                                 Good Luck!                                  *
+*                                                                             *
+*                         SELECT ONE OF THE OPTIONS:                          *
+*                   (type the number of the option wanted)                    *
+*                                                                             *
+*                         1- MAIN MENU       0- EXIT                          *
+*                                                                             *
+*******************************************************************************
