@@ -50,7 +50,10 @@ int game_start() {
     //asks repeatedly for an option only accepting 1, 2 or 0 (rules, play, quit)
     do {
         std::cin >> option;
-        if (option != rules & option != play_game & option != exit) {
+        if(cin.eof()){
+            std::exit(0);
+        }
+        else if(option != rules & option != play_game & option != exit) {
             cout << "Input not valid, please try again." << endl;
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
@@ -257,6 +260,11 @@ void player_move(game_info &gameplay) {
         //get player input
         cin >> player_move;
         cin.ignore(255,'\n');
+
+        //end the program if user press control + z
+        if(cin.eof()){
+            std::exit(0);
+        }
 
         //determine which char the player chose and validates it
         if(player_move == "q" || player_move == "Q"){
@@ -584,7 +592,10 @@ int main() {
             //ask player to go to main menu
             do{
                 cin >> keep_playing;
-                if(keep_playing != no_playing && keep_playing != yes_playing){
+                if(cin.eof()){
+                    std::exit(0);
+                }
+                else if(keep_playing != no_playing && keep_playing != yes_playing){
                     cout << "Please select a valid option (1- MAIN MENU or 0- EXIT): ";
                     cin.clear();
                     cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
@@ -599,7 +610,10 @@ int main() {
             do{
                 std::cin >> maze_num;
                 maze_not_exist = teste(maze_num); //test if maze exist
-                if(cin.fail() || maze_not_exist){
+                if(cin.eof()){
+                    std::exit(0);
+                }
+                else if(cin.fail() || maze_not_exist){
                     cout << "Not a valid inut or maze doens't exist" << endl;
                     cout << "please choose the maze number: ";
                     cin.clear();
@@ -618,7 +632,10 @@ int main() {
                 cout << "Please select an option: ";
                 do{
                     cin >> keep_playing;
-                    if(keep_playing != no_playing && keep_playing != yes_playing){
+                    if(cin.eof()){
+                        std::exit(0);
+                    }
+                    else if(keep_playing != no_playing && keep_playing != yes_playing){
                         cout << "Please select a valid option (1- YES or 0- NO): ";
                         cin.clear();
                         cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
