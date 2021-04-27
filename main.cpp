@@ -231,6 +231,7 @@ void player_move(game_info &gameplay) {
 
     const int detect_s_move = 1;
     const int detect_invalid_move = 0;
+    const int valid_move_reset = 1;
     const int move_position_positive = 1;
     const int move_position_negative = -1;
     const char alive_player = 'H';
@@ -240,49 +241,52 @@ void player_move(game_info &gameplay) {
     const char wall = '*';
     const char empty_map_space = ' ';
 
-    char player_move; //variable to detect player movement
+    string player_move; //variable to detect player movement
     bool movement_completed = false;
 
     int change_x = 0, change_y = 0; //to where we need to move relative where we are
     int s_move = 0; //verifies if it is an s input (choose not to move)
-    int valid_move = 1; //if move is valid we do it and break from the loop
+    int valid_move = valid_move_reset; //if move is valid we do it and break from the loop
 
     cout << endl << "Where do you want to go?" << endl;
     while(!movement_completed){
+
+        //reset move validation
+        valid_move = valid_move_reset;//flag for invalid movement
 
         //get player input
         cin >> player_move;
         cin.ignore(255,'\n');
 
         //determine which char the player chose and validates it
-        if(player_move == 'q' || player_move == 'Q'){
+        if(player_move == "q" || player_move == "Q"){
             change_y = move_position_negative;
             change_x = move_position_negative;
         }
-        else if(player_move == 'w' || player_move == 'W'){
+        else if(player_move == "w" || player_move == "W"){
            change_y = move_position_negative;
         }
-        else if(player_move == 'e' || player_move == 'E'){
+        else if(player_move == "e" || player_move == "E"){
             change_y = move_position_negative;
             change_x = move_position_positive;
         }
-        else if(player_move == 'a' || player_move == 'A'){
+        else if(player_move == "a" || player_move == "A"){
         change_x = move_position_negative;
         }
-        else if(player_move == 's' || player_move == 'S'){
+        else if(player_move == "s" || player_move == "S"){
             s_move = detect_s_move;
         }
-        else if(player_move == 'd' || player_move == 'D'){
+        else if(player_move == "d" || player_move == "D"){
             change_x = move_position_positive;
         }
-        else if(player_move == 'z' || player_move == 'Z'){
+        else if(player_move == "z" || player_move == "Z"){
             change_y = move_position_positive;
             change_x = move_position_negative;
         }
-        else if(player_move == 'x' || player_move == 'X'){
+        else if(player_move == "x" || player_move == "X"){
             change_y = move_position_positive;
         }
-        else if(player_move == 'c' || player_move == 'C'){
+        else if(player_move == "c" || player_move == "C"){
             change_y = move_position_positive;
             change_x = move_position_positive;
         }
