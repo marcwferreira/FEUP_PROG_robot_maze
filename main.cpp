@@ -576,6 +576,7 @@ void player_win(int game_time, int maze_num){
             mazefile << "Player        -   Time" << endl;
             mazefile << "----------------------" << endl;
             mazefile << player_name << " - " << game_time << "s";
+            mazefile.close(); //closing the file created
         }
         //store and organize winners
         else{
