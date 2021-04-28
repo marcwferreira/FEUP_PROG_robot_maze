@@ -522,9 +522,10 @@ int play(int maze_num,game_info &gameplay) {
 //Player won - keep the time of his game
 void player_win(int game_time, int maze_num){
 
+    const string save_yes = "1";
+    const string save_no = "0";
+
     string save_time_choice;
-    string save_yes = "1";
-    string save_no = "0";
 
     //prints the player time
     cout << "Total time to complete maze: " << game_time << "s" << endl;
