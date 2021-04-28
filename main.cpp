@@ -583,11 +583,13 @@ void player_win(int game_time, int maze_num){
             //store and organize winners
         
         }  mazefile.close();
+
+         //display a message showing time was saved
+        cout << "Time saved, if you wish to see it go to time records!" << endl;
     }
-
-    //display a message showing time was saved
-    cout << "Time saved, if you wish to see it go to time records!" << endl;
-
+    else{
+        cout << "Time not saved." << endl;
+    }
 }
 
 //function to show time records
@@ -606,7 +608,6 @@ void show_time_records(int maze_num){
 
     string line;
 
-
     //if opening the file fails it gives an error
     if(!winnerfile.is_open()){
         cout << "Could not open the winner file for the maze #" << maze_num << endl;
@@ -619,7 +620,6 @@ void show_time_records(int maze_num){
     } winnerfile.close();
 
 }
-
 
 //Main
 int main() {
