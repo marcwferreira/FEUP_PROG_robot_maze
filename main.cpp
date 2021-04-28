@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <stdio.h>
 #include <chrono>
+#include <iomanip>
 
 using namespace std;
 
@@ -177,8 +178,8 @@ void maze(int maze_num,game_info &gameplay) {
 
     //resizing the vector in gameplay to appropriate size
     gameplay.maze_map.resize(pos_y,vector<char>(pos_x));
-    gameplay.player_pos.resize(2);
-    gameplay.robot_info.resize(count_robot,vector<int>(3));
+    gameplay.player_pos.resize(2);//vector with line and collumn position of player
+    gameplay.robot_info.resize(count_robot,vector<int>(3));//vector with line, collumn positions and condition of robot
 
     int map_line = 0; //counting the lines
     int robot_index = 0; //help indexing the robot_info
@@ -559,8 +560,6 @@ void player_win(int game_time, int maze_num){
             }
             else if(player_name.size() > 15){ //check if player tried to input more than 15 chars
                 cout << "Name must have a max of 15 chars." << endl << "Please choose name to be recorded: ";
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
             }
         }while(player_name.size() > 15);
 
@@ -574,9 +573,9 @@ void player_win(int game_time, int maze_num){
         //create a winner file for the maze if it doesn't exist
         if(!mazefile.is_open()){
             ofstream mazefile(maze_select);
-            mazefile << "Player        -   Time" << endl;
+            mazefile << "Player         -  Time" << endl;
             mazefile << "----------------------" << endl;
-            mazefile << player_name << " - " << game_time << "s";
+            mazefile << left << setw(15) << player_name << "-" << right << setw(5) << game_time << "s";
             mazefile.close(); //closing the file created
         }
         //store and organize winners
@@ -650,6 +649,7 @@ int main() {
     //variable for game mapping
     game_info gameplay;
 
+    //loop to allow player to play again
     do{
          int option = game_start();//ask what the player wants to do
 
