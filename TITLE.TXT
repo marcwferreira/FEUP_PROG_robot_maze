@@ -9,6 +9,6 @@
 *                          PLEASE SELECT AN OPTION:                           *
 *                   (type the number of the option wanted)                    *
 *                                                                             *
-*                    1- RULES       2- PLAY       0- EXIT                     *
+*         1- RULES       2- PLAY       3- TIME RECORDS       0- EXIT          *
 *                                                                             *
 *******************************************************************************

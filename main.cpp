@@ -25,6 +25,7 @@ int game_start() {
     //options choice
     const string rules = "1";
     const string play_game = "2";
+    const string time_records = "3";
     const string exit = "0";
     
     string option;//variable to store the user input
@@ -35,11 +36,14 @@ int game_start() {
     //print title screen and menu
     ifstream title_game;
     title_game.open("TITLE.TXT");
+    //alternative title if file does not exist
     if(!title_game.is_open()){
         cout << "Welcome to Robot Maze" << endl;
         cout << "please choose an option: " << endl;
-        cout << "1- Rules" << endl << "2- Play" << endl << "0- Exit" << endl;
+        cout << "1- Rules" << endl << "2- Play" << endl;
+        cout << "3- Time Records" << endl << "0- Exit" << endl;
     }
+    //title if file exist
     else{
         while (getline(title_game, title_line)) {
             cout << title_line << endl;
@@ -53,12 +57,12 @@ int game_start() {
         if(cin.eof()){
             std::exit(0);
         }
-        else if(option != rules & option != play_game & option != exit) {
+        else if(option != rules & option != play_game & option != exit & option != time_records) {
             cout << "Input not valid, please try again." << endl;
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         }
-    } while (option != rules & option != play_game & option != exit);
+    } while (option != rules & option != play_game & option != exit & option != time_records);
 
     //convert option into int
     option_selected = stoi(option);
@@ -77,18 +81,18 @@ string maze_name(int maze_num, bool winner_file){
     if(winner_file == true){
         //select maze txt file for the winners
         if (maze_num < maze_num_check) {
-            maze = "Maze_0" + to_string(maze_num) + "_WINNERS.TXT";
+            maze = "MAZE_0" + to_string(maze_num) + "_WINNERS.TXT";
         }
         else {
-            maze = "Maze_" + to_string(maze_num) + "_WINNERS.TXT";
+            maze = "MAZE_" + to_string(maze_num) + "_WINNERS.TXT";
         }
     }
     else{
         if (maze_num < maze_num_check) {
-            maze = "Maze_0" + to_string(maze_num) + ".TXT";
+            maze = "MAZE_0" + to_string(maze_num) + ".TXT";
         }
         else {
-            maze = "Maze_" + to_string(maze_num) + ".TXT";
+            maze = "MAZE_" + to_string(maze_num) + ".TXT";
         }
     }
 
@@ -96,15 +100,21 @@ string maze_name(int maze_num, bool winner_file){
 }
 
 //Test if the maze exists in the files
-bool teste(int maze_num) {
+bool teste(int maze_num, bool winner_teste) {
 
     const bool game_file = false;//indicates that this will name a maze file and not a winner file
+    const bool winner_file = true;
     
     bool flag_no_map = false;
 
     string maze;
 
-    maze = maze_name(maze_num, game_file);
+    if(winner_teste == false){
+        maze = maze_name(maze_num, game_file);
+    }
+    else if(winner_teste == true){
+        maze = maze_name(maze_num, winner_file);
+    }
 
     ifstream mazefile;
     mazefile.open(maze);
@@ -511,28 +521,105 @@ int play(int maze_num,game_info &gameplay) {
 
 //Player won - keep the time of his game
 void player_win(int game_time, int maze_num){
-    cout << "this was your time: " << game_time << endl;
-    //TO BE IMPLEMENTED
 
-    const bool winner_file = true;//indicates that the file should be named with _WINNERS at the end
+    string save_time_choice;
+    string save_yes = "1";
+    string save_no = "0";
 
-    string maze_select = maze_name(maze_num, winner_file);
+    //prints the player time
+    cout << "Total time to complete maze: " << game_time << "s" << endl;
+    //ask the player if he wishes to record his time
+    cout << "Do you wish to save this time? " << endl;
+    cout << "1- YES " << endl << "0- NO" << endl;
+    do {
+        std::cin >> save_time_choice;
+        if(cin.eof()){
+            std::exit(0);
+        }
+        else if(save_time_choice != save_yes & save_time_choice != save_no) {
+            cout << "Input not valid, please choose 1- YES or 0- NO" << endl;
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        }
+    } while (save_time_choice != save_yes & save_time_choice != save_no);
 
-    ifstream mazefile;
-    mazefile.open(maze_select);
+    //if player wishes to save his time
+    if(save_time_choice == save_yes){
 
-     if(!mazefile.is_open()){
-        //create a file
-    }
-    else{
+        string player_name;
+
+        //ask player name also only allow for names up to 15 chars
+        cout << "Please choose name to be recorded (name must have a mex of 15 character): ";
+        do{
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            getline(cin, player_name);
+            if(cin.eof()){
+                std::exit(0);
+            }
+            else if(player_name.size() > 15){ //check if player tried to input more than 15 chars
+                cout << "Name must have a max of 15 chars." << endl << "Please choose name to be recorded: ";
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+            }
+        }while(player_name.size() > 15);
+
+        const bool winner_file = true;//indicates that the file should be named with _WINNERS at the end
+        string maze_select = maze_name(maze_num, winner_file);//load the name of the file
+
+        //opening the file
+        ifstream mazefile;
+        mazefile.open(maze_select);
+
+        //create a winner file for the maze if it doesn't exist
+        if(!mazefile.is_open()){
+            ofstream mazefile(maze_select);
+            mazefile << "Player        -   Time" << endl;
+            mazefile << "----------------------" << endl;
+            mazefile << player_name << " - " << game_time << "s";
+        }
         //store and organize winners
-       
-
-    
-        mazefile.close();
-
+        else{
+            
+            //store and organize winners
+        
+        }  mazefile.close();
     }
+
+    //display a message showing time was saved
+    cout << "Time saved, if you wish to see it go to time records!" << endl;
+
 }
+
+//function to show time records
+void show_time_records(int maze_num){
+    
+    const bool winner_file = true;
+
+    string winner_file_name; //where the file name will be loaded
+
+    //function to prepare maze name
+    winner_file_name = maze_name( maze_num, winner_file);
+
+    //open the file
+    ifstream winnerfile;
+    winnerfile.open(winner_file_name);
+
+    string line;
+
+
+    //if opening the file fails it gives an error
+    if(!winnerfile.is_open()){
+        cout << "Could not open the winner file for the maze #" << maze_num << endl;
+    }
+    //if opening the files works it prints its content
+    else{
+        while(getline(winnerfile, line)){
+            cout << line << endl;
+        }
+    } winnerfile.close();
+
+}
+
 
 //Main
 int main() {
@@ -540,10 +627,13 @@ int main() {
     //opttions choice
     const int rules = 1;
     const int play_game = 2;
+    const int show_times = 3;
     const int exit = 0;
     const int time_fail = 0;
     const string no_playing = "0";
     const string yes_playing = "1";
+    const bool winner_test_no = false;
+    const bool winner_test_yes = true;
 
     //keep the loop for the player to play again
     string keep_playing;
@@ -568,6 +658,7 @@ int main() {
             //show the rules
             ifstream rules_file;
             rules_file.open("RULES.TXT");
+            //alternative rules if file does not exist
             if(!rules_file.is_open()){
                 cout << "Rules:" << endl; //write the rules
                 cout << "Your objective is to survive inside the maze while robots chase you" << endl;
@@ -595,6 +686,7 @@ int main() {
                 cout << "1- MAIN MENU" << endl << "0- EXIT" << endl;
                 cout << "please select you option:" ;
             }
+            //rules if file exist
             else{
                 while (getline(rules_file, rules_read)) {
                     cout << rules_read << endl;
@@ -621,7 +713,7 @@ int main() {
             //Choose an available maze
             do{
                 std::cin >> maze_num;
-                maze_not_exist = teste(maze_num); //test if maze exist
+                maze_not_exist = teste(maze_num, winner_test_no); //test if maze exist
                 if(cin.eof()){
                     std::exit(0);
                 }
@@ -636,9 +728,11 @@ int main() {
 
             if (maze_num != 0) {
                 gameplay_time = play(maze_num, gameplay);
+                //call function to save player time if he won the maze
                 if(gameplay_time != time_fail){
                     player_win(gameplay_time, maze_num);//calls the function to store players time
                 }
+                //ask the player if he wants to play again
                 cout << "Do you want to play again?" << endl;
                 cout << "1- YES" << endl << "0- NO" << endl;
                 cout << "Please select an option: ";
@@ -658,6 +752,45 @@ int main() {
             else {
                 cout << "Bye!";
             }
+        }
+        //see time records
+        else if(option == show_times){
+
+            //ask the player for the maze numbem to show time
+            cout << "Choose the maze number you wish to see the records: ";
+             do{
+                std::cin >> maze_num;
+                maze_not_exist = teste(maze_num, winner_test_yes); //test if maze exist
+                if(cin.eof()){
+                    std::exit(0);
+                }
+                else if(cin.fail() || maze_not_exist){
+                    cout << "Not a valid inut or maze winners doens't exist" << endl;
+                    cout << "please choose the maze number: ";
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                }
+            }while( cin.fail() || maze_not_exist);
+
+            //calls the function to show the times
+            show_time_records(maze_num);
+            
+
+            //ask the player if he wants to play the game (go to main menu)
+                cout << "Do you want to play (go to main menu)?" << endl;
+                cout << "1- YES" << endl << "0- NO" << endl;
+                cout << "Please select an option: ";
+                do{
+                    cin >> keep_playing;
+                    if(cin.eof()){
+                        std::exit(0);
+                    }
+                    else if(keep_playing != no_playing && keep_playing != yes_playing){
+                        cout << "Please select a valid option (1- YES or 0- NO): ";
+                        cin.clear();
+                        cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                    }
+                }while(keep_playing != no_playing && keep_playing != yes_playing);
         }
         //Exit
         else if (option == exit){
