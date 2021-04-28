@@ -202,9 +202,9 @@ void maze(int maze_num,game_info &gameplay) {
             }
             //find robots positions in the map
             else if(gameplay.maze_map[i][j] == alive_robot){
-                gameplay.robot_info[robot_index][0] = 1; //robot condition, 1 means the robot is alive
-                gameplay.robot_info[robot_index][1] = i; //robot line position
-                gameplay.robot_info[robot_index][2] = j; //robot column position
+                gameplay.robot_info[robot_index][0] = i; //robot line position
+                gameplay.robot_info[robot_index][1] = j; //robot column position
+                gameplay.robot_info[robot_index][2] = 1; //robot condition, 1 means the robot is alive
 
                 robot_index++;
             }
@@ -232,11 +232,13 @@ void print_maze(game_info &gameplay){
 //Player movement
 void player_move(game_info &gameplay) {
 
+    const bool valid_move_reset = true;
+    const int detect_invalid_move = false;
     const int detect_s_move = 1;
-    const int detect_invalid_move = 0;
-    const int valid_move_reset = 1;
     const int move_position_positive = 1;
     const int move_position_negative = -1;
+    const int line = 0; //player line
+    const int column = 1; //player column
     const char alive_player = 'H';
     const char dead_player = 'h';
     const char alive_robot = 'R';
@@ -249,13 +251,15 @@ void player_move(game_info &gameplay) {
 
     int change_x = 0, change_y = 0; //to where we need to move relative where we are
     int s_move = 0; //verifies if it is an s input (choose not to move)
-    int valid_move = valid_move_reset; //if move is valid we do it and break from the loop
+    bool valid_move = valid_move_reset; //if move is valid we do it and break from the loop
 
     cout << endl << "Where do you want to go?" << endl;
     while(!movement_completed){
 
-        //reset move validation
+        //reset move validation and move positions
         valid_move = valid_move_reset;//flag for invalid movement
+        change_x = 0; //means no movement in x asix
+        change_y = 0; //means no movment in y axis
 
         //get player input
         cin >> player_move;
@@ -303,29 +307,29 @@ void player_move(game_info &gameplay) {
         }
 
         //if valid checks where it is going and its consequences
-        if(valid_move == 1){
+        if(valid_move == valid_move_reset){
             //player tries to move into dead robot
-            if(gameplay.maze_map[gameplay.player_pos[0]+change_y][gameplay.player_pos[1]+change_x] == dead_robot){
-                valid_move = 0;
+            if(gameplay.maze_map[gameplay.player_pos[line]+change_y][gameplay.player_pos[column]+change_x] == dead_robot){
+                valid_move = detect_invalid_move;
             }
             //player hits wall or robt
-            else if(gameplay.maze_map[gameplay.player_pos[0]+change_y][gameplay.player_pos[1]+change_x] == wall || gameplay.maze_map[gameplay.player_pos[0]+change_y][gameplay.player_pos[1]+change_x] == alive_robot){
-                gameplay.maze_map[gameplay.player_pos[0]+change_y][gameplay.player_pos[1]+change_x] = dead_player;
+            else if(gameplay.maze_map[gameplay.player_pos[line]+change_y][gameplay.player_pos[column]+change_x] == wall || gameplay.maze_map[gameplay.player_pos[line]+change_y][gameplay.player_pos[column]+change_x] == alive_robot){
+                gameplay.maze_map[gameplay.player_pos[line]+change_y][gameplay.player_pos[column]+change_x] = dead_player;
                 if(s_move != detect_s_move){
-                gameplay.maze_map[gameplay.player_pos[0]][gameplay.player_pos[1]] = empty_map_space;
+                gameplay.maze_map[gameplay.player_pos[line]][gameplay.player_pos[column]] = empty_map_space;
                 }
-                gameplay.player_pos[0] = gameplay.player_pos[0]+change_y;
-                gameplay.player_pos[1] = gameplay.player_pos[1]+change_x;
+                gameplay.player_pos[line] = gameplay.player_pos[line]+change_y;
+                gameplay.player_pos[column] = gameplay.player_pos[column]+change_x;
                 movement_completed = true;
             }
             //player moves normally
             else{
-                gameplay.maze_map[gameplay.player_pos[0]+change_y][gameplay.player_pos[1]+change_x] = alive_player;
+                gameplay.maze_map[gameplay.player_pos[line]+change_y][gameplay.player_pos[column]+change_x] = alive_player;
                 if(s_move != detect_s_move){
-                    gameplay.maze_map[gameplay.player_pos[0]][gameplay.player_pos[1]] = empty_map_space;
+                    gameplay.maze_map[gameplay.player_pos[line]][gameplay.player_pos[column]] = empty_map_space;
                 }
-                gameplay.player_pos[0] = gameplay.player_pos[0]+change_y;
-                gameplay.player_pos[1] = gameplay.player_pos[1]+change_x;
+                gameplay.player_pos[line] = gameplay.player_pos[line]+change_y;
+                gameplay.player_pos[column] = gameplay.player_pos[column]+change_x;
                 movement_completed = true;
             }
         }
@@ -338,10 +342,13 @@ void player_move(game_info &gameplay) {
 }
 
 //Robots movement
-void robot_move(int i,game_info &gameplay){
+void robot_move(int robot_index,game_info &gameplay){
 
     //defining constants
     const int robot_move_place = 0; //used to determine the robts vertical and horizontal movement
+    const int line = 0; //robot line
+    const int column = 1; //robot column
+    const int condition = 2; //robot condition (alive or dead)
     const char alive_player = 'H';
     const char dead_player = 'h';
     const char alive_robot = 'R';
@@ -354,54 +361,54 @@ void robot_move(int i,game_info &gameplay){
     int change_y = 0;
 
     //determines if the robot will move up or down (will chase the player)
-    if(gameplay.robot_info[i][1] - gameplay.player_pos[0] > robot_move_place){
+    if(gameplay.robot_info[robot_index][line] - gameplay.player_pos[line] > robot_move_place){
         change_y = -1;
     }
-    else if(gameplay.robot_info[i][1] - gameplay.player_pos[0] < robot_move_place){
+    else if(gameplay.robot_info[robot_index][line] - gameplay.player_pos[line] < robot_move_place){
         change_y = 1;
     }
 
     //determines if the robot will move left or right (will chase the player)
-    if(gameplay.robot_info[i][2] - gameplay.player_pos[1] > robot_move_place){
+    if(gameplay.robot_info[robot_index][column] - gameplay.player_pos[column] > robot_move_place){
         change_x = -1;
     }
-    else if(gameplay.robot_info[i][2] - gameplay.player_pos[1] < robot_move_place){
+    else if(gameplay.robot_info[robot_index][column] - gameplay.player_pos[column] < robot_move_place){
         change_x = 1;
     }
 
     //MAKE THE ROBOTS MOVE
     //robot catches player and player
-    if(gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] == alive_player){
-        gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] = dead_player;
-        gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] = empty_map_space;
+    if(gameplay.maze_map[gameplay.robot_info[robot_index][line]+change_y][gameplay.robot_info[robot_index][column]+change_x] == alive_player){
+        gameplay.maze_map[gameplay.robot_info[robot_index][line]+change_y][gameplay.robot_info[robot_index][column]+change_x] = dead_player;
+        gameplay.maze_map[gameplay.robot_info[robot_index][line]][gameplay.robot_info[robot_index][column]] = empty_map_space;
     }
     //robot dies in fence
-    else if(gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] == wall){
-        gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] = dead_robot;
-        gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] = empty_map_space;
-        gameplay.robot_info[i][1] = gameplay.robot_info[i][1]+change_y;
-        gameplay.robot_info[i][2] = gameplay.robot_info[i][2]+change_x;
+    else if(gameplay.maze_map[gameplay.robot_info[robot_index][line]+change_y][gameplay.robot_info[robot_index][column]+change_x] == wall){
+        gameplay.maze_map[gameplay.robot_info[robot_index][line]+change_y][gameplay.robot_info[robot_index][column]+change_x] = dead_robot;
+        gameplay.maze_map[gameplay.robot_info[robot_index][line]][gameplay.robot_info[robot_index][column]] = empty_map_space;
+        gameplay.robot_info[robot_index][line] = gameplay.robot_info[robot_index][line]+change_y;
+        gameplay.robot_info[robot_index][column] = gameplay.robot_info[robot_index][column]+change_x;
     }
     //robot colides with another and both get stuck
-    else if(gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] == alive_robot){
-        gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] = dead_robot;
-        gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] = empty_map_space;
-        gameplay.robot_info[i][1] = gameplay.robot_info[i][1]+change_y;
-        gameplay.robot_info[i][2] = gameplay.robot_info[i][2]+change_x;
+    else if(gameplay.maze_map[gameplay.robot_info[robot_index][line]+change_y][gameplay.robot_info[robot_index][column]+change_x] == alive_robot){
+        gameplay.maze_map[gameplay.robot_info[robot_index][line]+change_y][gameplay.robot_info[robot_index][column]+change_x] = dead_robot;
+        gameplay.maze_map[gameplay.robot_info[robot_index][line]][gameplay.robot_info[robot_index][column]] = empty_map_space;
+        gameplay.robot_info[robot_index][line] = gameplay.robot_info[robot_index][line]+change_y;
+        gameplay.robot_info[robot_index][column] = gameplay.robot_info[robot_index][column]+change_x;
     }
     //got colides with stuck robot and get stuck
-    else if(gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] == dead_robot){
-        gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] = dead_robot;
-        gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] = empty_map_space;
-        gameplay.robot_info[i][1] = gameplay.robot_info[i][1]+change_y;
-        gameplay.robot_info[i][2] = gameplay.robot_info[i][2]+change_x;
+    else if(gameplay.maze_map[gameplay.robot_info[robot_index][line]+change_y][gameplay.robot_info[robot_index][column]+change_x] == dead_robot){
+        gameplay.maze_map[gameplay.robot_info[robot_index][line]+change_y][gameplay.robot_info[robot_index][column]+change_x] = dead_robot;
+        gameplay.maze_map[gameplay.robot_info[robot_index][line]][gameplay.robot_info[robot_index][column]] = empty_map_space;
+        gameplay.robot_info[robot_index][line] = gameplay.robot_info[robot_index][line]+change_y;
+        gameplay.robot_info[robot_index][column] = gameplay.robot_info[robot_index][column]+change_x;
     }
     //robots move normally
     else{
-        gameplay.maze_map[gameplay.robot_info[i][1]+change_y][gameplay.robot_info[i][2]+change_x] = alive_robot;
-        gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] = empty_map_space;
-        gameplay.robot_info[i][1] = gameplay.robot_info[i][1]+change_y;
-        gameplay.robot_info[i][2] = gameplay.robot_info[i][2]+change_x;
+        gameplay.maze_map[gameplay.robot_info[robot_index][line]+change_y][gameplay.robot_info[robot_index][column]+change_x] = alive_robot;
+        gameplay.maze_map[gameplay.robot_info[robot_index][line]][gameplay.robot_info[robot_index][column]] = empty_map_space;
+        gameplay.robot_info[robot_index][line] = gameplay.robot_info[robot_index][line]+change_y;
+        gameplay.robot_info[robot_index][column] = gameplay.robot_info[robot_index][column]+change_x;
     }
 
 }
@@ -413,6 +420,10 @@ int play(int maze_num,game_info &gameplay) {
     const char dead_player = 'h';
     const char dead_robot = 'r';
     const int robot_cond_alive = 1;
+    const int robot_cond_dead = 0;
+    const int line = 0; //player or robot line
+    const int column = 1; // player or robot column
+    const int condition = 2; // robot condition (alive or dead)
 
     gameplay.robots_dead = 0;//variable to see if all robots are dead during game
 
@@ -433,26 +444,27 @@ int play(int maze_num,game_info &gameplay) {
         //print_maze(gameplay); //prints the maze map after the movement
 
         //checks if the player lost after the movement
-        if(gameplay.maze_map[gameplay.player_pos[0]][gameplay.player_pos[1]] == dead_player){
+        if(gameplay.maze_map[gameplay.player_pos[line]][gameplay.player_pos[column]] == dead_player){
+            print_maze(gameplay);
             cout << "You lost!" << endl;
             break; //break the "game loop" without waiting for robot movement
         }
 
         //movement of the robots
-        for(int i=0;i < gameplay.robot_info.size();i++){
-            if(gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] == dead_robot && gameplay.robot_info[i][0] == robot_cond_alive){
-                gameplay.robot_info[i][0] = 0;
+        for(int robot_index=0;robot_index < gameplay.robot_info.size();robot_index++){
+            if(gameplay.maze_map[gameplay.robot_info[robot_index][line]][gameplay.robot_info[robot_index][column]] == dead_robot && gameplay.robot_info[robot_index][condition] == robot_cond_alive){
+                gameplay.robot_info[robot_index][condition] = robot_cond_dead;
                 gameplay.robots_dead++;
             }
-            else if(gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] == dead_robot){
-                gameplay.robot_info[i][0] = 0;
+            else if(gameplay.maze_map[gameplay.robot_info[robot_index][line]][gameplay.robot_info[robot_index][column]] == dead_robot){
+                gameplay.robot_info[robot_index][condition] = robot_cond_dead;
             }
             else{
-                robot_move(i, gameplay);   //robots movement
+                robot_move(robot_index, gameplay);   //robots movement
             }
             
             //checks if the player died after the robot movement and exit their movements
-            if(gameplay.maze_map[gameplay.player_pos[0]][gameplay.player_pos[1]] == dead_player){
+            if(gameplay.maze_map[gameplay.player_pos[line]][gameplay.player_pos[column]] == dead_player){
                 break; //break the for loop (player movement and robots movement)
             }
 
@@ -467,15 +479,15 @@ int play(int maze_num,game_info &gameplay) {
         print_maze(gameplay); //prints the maze map after the robot movement
 
         //after all the robots move checks if the player died
-        if(gameplay.maze_map[gameplay.player_pos[0]][gameplay.player_pos[1]] == dead_player){
+        if(gameplay.maze_map[gameplay.player_pos[line]][gameplay.player_pos[column]] == dead_player){
             cout << "You lost!" << endl;
             game_run = false; //break the game loop
         }
 
         //checks if the player won
         r_dead =0; //resets the counting for how many robots are dead
-        for(int i=0;i < gameplay.robot_info.size();i++){
-            if(gameplay.maze_map[gameplay.robot_info[i][1]][gameplay.robot_info[i][2]] == dead_robot){
+        for(int robot_index=0;robot_index < gameplay.robot_info.size();robot_index++){
+            if(gameplay.maze_map[gameplay.robot_info[robot_index][line]][gameplay.robot_info[robot_index][column]] == dead_robot){
                 r_dead++;
             }
         }
