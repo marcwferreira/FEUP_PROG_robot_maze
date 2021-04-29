@@ -525,6 +525,7 @@ void player_win(int game_time, int maze_num){
 
     const string save_yes = "1";
     const string save_no = "0";
+    const int max_name_size = 15;
 
     string save_time_choice;
 
@@ -551,17 +552,19 @@ void player_win(int game_time, int maze_num){
         string player_name;
 
         //ask player name also only allow for names up to 15 chars
-        cout << "Please choose name to be recorded (name must have a mex of 15 character): ";
-        do{
+        cout << "Please choose name to be recorded (name must have a max of 15 character, spaces are allowed but count as a character): ";
+       do{
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             getline(cin, player_name);
             if(cin.eof()){
                 std::exit(0);
+            
             }
-            else if(player_name.size() > 15){ //check if player tried to input more than 15 chars
+            else if(player_name.size() > max_name_size){ //check if player tried to input more than 15 chars
                 cout << "Name must have a max of 15 chars." << endl << "Please choose name to be recorded: ";
+                cin.clear();
             }
-        }while(player_name.size() > 15);
+        } while(player_name.size() > max_name_size);
 
         const bool winner_file = true;//indicates that the file should be named with _WINNERS at the end
         string maze_select = maze_name(maze_num, winner_file);//load the name of the file
@@ -581,7 +584,7 @@ void player_win(int game_time, int maze_num){
         //store and organize winners
         else{
             
-            //store and organize winners
+            //STORE AND ORGANIZE WINNERS
         
         }  mazefile.close();
 
