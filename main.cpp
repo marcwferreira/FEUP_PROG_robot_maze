@@ -521,18 +521,19 @@ int play(int maze_num, game_info& gameplay) {
 }
 
 //find player name and time and replace with the new one
-int findPlayerSubstitute(string player_name, int game_time){
+int findPlayerSubstitute(string player_name, int game_time, string maze_select) {
 
-    count 0;
-    replace = left << setw(15) << player_name << "-" << right << setw(5) << game_time << "s";
-    flag = false;
+    int count = 0;
+    string replace = left << setw(15) << player_name << "-" << right << setw(5) << game_time << "s";
+    bool flag = false;
+    string line;
 
     ifstream mazefile;
     mazefile.open(maze_select);
 
     while (getline(mazefile, line)) {
 
-        if (find == line) {
+        if (replace == line) {
             line = replace;
             flag = true;
         }
@@ -553,7 +554,9 @@ int findPlayerSubstitute(string player_name, int game_time){
 }
 
 //organize winners times
-void organizeTimes(int lines) {
+void organizeTimes(int lines, string maze_select) {
+
+    string line;
 
     ifstream mazefile;
     mazefile.open(maze_select);
@@ -568,8 +571,8 @@ void organizeTimes(int lines) {
 
     for (int i = 0; i < (lines - 1); i++)
     {
-        int size = (time[i].length()-2);
-        for (int j = i + 1; j < n; j++)
+        int size = (times[i].length() - 2);
+        for (int j = i + 1; j < lines; j++)
         {
             if (times[i].substr(17, size) > times[j].substr(17, size))
             {
@@ -658,12 +661,12 @@ void player_win(int game_time, int maze_num) {
         //store and organize winners
         else {
 
-            if (findPlayerSubstitute(player_name, game_time) != -1) {
-                organize(findPlayerSubstitute(player_name, game_time));
+            if (findPlayerSubstitute(player_name, game_time, maze_select) != -1) {
+                organizeTimes(findPlayerSubstitute(player_name, game_time, maze_select), maze_select);
             }
             else {
                 mazefile << left << setw(15) << player_name << "-" << right << setw(5) << game_time << "s";
-                organize(mazefile);
+                organizeTimes(findPlayerSubstitute(player_name, game_time, maze_select), maze_select);
             }
 
         }  mazefile.close();
