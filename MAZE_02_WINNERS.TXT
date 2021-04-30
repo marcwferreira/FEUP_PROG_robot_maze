@@ -1,6 +1,6 @@
-Player        -   Time
+Player         -  Time
 ----------------------
-Sara Moura    -    512
-Rui Sousa     -    513
-Ana Silva     -    874
-Pedro Costa   -    901
+Sara Moura     -    2s
+Rui Sousa      -    3s
+Ana Silva      -   14s
+Pedro Costa    -  121s

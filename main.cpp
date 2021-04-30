@@ -718,6 +718,7 @@ int main() {
     const int show_times = 3;
     const int exit = 0;
     const int time_fail = 0;
+    const int main_menu = 0;
     const string no_playing = "0";
     const string yes_playing = "1";
     const bool winner_test_no = false;
@@ -798,7 +799,7 @@ int main() {
         //Play the game
         else if (option == play_game) {
 
-            cout << "Here we go!" << endl << "Choose the maze number: ";
+            cout << "Here we go!" << endl << "Choose the maze number (0 for main menu): ";
             //Choose an available maze
             do{
                 std::cin >> maze_num;
@@ -806,16 +807,19 @@ int main() {
                 if(cin.eof()){
                     std::exit(0);
                 }
+                else if(maze_num == main_menu){
+                    break; //leave the loop after go to main menu
+                }
                 else if(cin.fail() || maze_not_exist){
                     cout << "Not a valid inut or maze doens't exist" << endl;
-                    cout << "please choose the maze number: ";
+                    cout << "please choose the maze number (0 for main menu): ";
                     cin.clear();
                     cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
                 }
             }while( cin.fail() || maze_not_exist);
                 
 
-            if (maze_num != 0) {
+            if (maze_num != main_menu) {
                 gameplay_time = play(maze_num, gameplay);
                 //call function to save player time if he won the maze
                 if(gameplay_time != time_fail){
@@ -837,35 +841,38 @@ int main() {
                     }
                 }while(keep_playing != no_playing && keep_playing != yes_playing);
             }
-            //Exit
+            //Go to main menu
             else {
-                cout << "Bye!";
+                keep_playing = yes_playing;
             }
         }
         //see time records
         else if(option == show_times){
 
             //ask the player for the maze numbem to show time
-            cout << "Choose the maze number you wish to see the records: ";
+            cout << "Choose the maze number you wish to see the records (0 for main menu): ";
              do{
                 std::cin >> maze_num;
                 maze_not_exist = teste(maze_num, winner_test_yes); //test if maze exist
                 if(cin.eof()){
                     std::exit(0);
                 }
+                else if(maze_num == main_menu){
+                    break;
+                }
                 else if(cin.fail() || maze_not_exist){
                     cout << "Not a valid inut or maze winners doens't exist" << endl;
-                    cout << "please choose the maze number: ";
+                    cout << "please choose the maze number (0 for main menu): ";
                     cin.clear();
                     cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
                 }
             }while( cin.fail() || maze_not_exist);
 
-            //calls the function to show the times
-            show_time_records(maze_num);
-            
-
-            //ask the player if he wants to play the game (go to main menu)
+            if(maze_num != main_menu){
+                //calls the function to show the times
+                show_time_records(maze_num);
+                
+                //ask the player if he wants to play the game (go to main menu)
                 cout << "Do you want to play (go to main menu)?" << endl;
                 cout << "1- YES" << endl << "0- NO" << endl;
                 cout << "Please select an option: ";
@@ -880,6 +887,10 @@ int main() {
                         cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
                     }
                 }while(keep_playing != no_playing && keep_playing != yes_playing);
+            }
+            else{
+                keep_playing = yes_playing;
+            }
         }
         //Exit
         else if (option == exit){
