@@ -627,10 +627,16 @@ void player_win(int game_time, int maze_num){
             player_name_to_store << left << setw(14) << player_name;
             player_time_to_store << right << setw(5) << game_time << "s";
 
-            //if name alreay exist replace the time
+            //if name alreay exist replace the time only if the time is lower
             for(int index = 0; index < winner_reading.size(); index++){
                 if(winner_reading[index][player_name_read] == player_name_to_store.str()){
+                    //only replaces the time if the time is lower
+                    if(player_time_to_store.str() <= winner_reading[index][player_time_read]){
                     winner_reading[index][player_time_read] = player_time_to_store.str();
+                    }
+                    else{
+                        cout << "Previous time was better, time was not updated." << endl;
+                    }
                     player_already_exist = true;
                 }
             }
