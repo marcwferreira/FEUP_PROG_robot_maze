@@ -11,6 +11,9 @@
 #include <iomanip>
 #include <algorithm>
 
+//our functions
+#include "gameStart.h"
+
 using namespace std;
 
 //Struct to pass important game info
