@@ -13,16 +13,17 @@
 
 //our functions
 #include "gameStart.h" //this file
+#include "mazeName.h"
 
 using namespace std;
 
 //Function for the main menu - returns the option chosen by the user
 int game_start() {
-    
-    string option;//variable to store the user input
+
+    std::string option;//variable to store the user input
     int option_selected;//convert string into int
 
-    string title_line;//for title screen
+    std::string title_line;//for title screen
 
     //print title screen and menu
     ifstream title_game;

@@ -1,7 +1,7 @@
 //T09_G12
 
-#ifndef GAMESTART_H
-#define GAMESTART_H
+#ifndef TESTE_H
+#define TESTE_H
 
 #include <iostream>
 #include <fstream>
@@ -15,12 +15,9 @@
 #include <algorithm>
 
 //Function for the main menu - returns options chosen by the user
-int game_start();
+bool teste(int maze_num, bool winner_teste);
 
-//options choice
-const std::string rules = "1";
-const std::string play_game = "2";
-const std::string time_records = "3";
-const std::string exit_game = "0";
+const bool game_file = false;//indicates that this will name a maze file and not a winner file
+const bool winner_file = true;
 
 #endif
