@@ -18,9 +18,12 @@
 int game_start();
 
 //options choice
-const std::string rules = "1";
-const std::string play_game = "2";
-const std::string time_records = "3";
-const std::string exit_game = "0";
+const string rules = "1";
+const string play_game = "2";
+const string time_records = "3";
+const string exit_game = "0";
 
 #endif
+
+//our functions
+//#include "gameStart.h" //this file
