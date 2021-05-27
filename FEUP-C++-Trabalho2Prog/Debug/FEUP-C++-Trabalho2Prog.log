@@ -1,0 +1,45 @@
+﻿  FEUP-C++-Trabalho2Prog.cpp
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Post.h(12,1): error C2504: 'GameObject': base class undefined
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,14): error C3646: 'p': unknown override specifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  Game.cpp
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Game.h(17,12): error C3646: 'player_1': unknown override specifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Game.h(17,20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Game.h(18,10): error C3646: 'maze': unknown override specifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Game.h(18,14): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Game.h(19,11): error C2065: 'Robot': undeclared identifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Game.h(19,17): error C2059: syntax error: '>'
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,14): error C3646: 'p': unknown override specifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Maze.h(17,11): error C2065: 'Post': undeclared identifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Maze.h(17,16): error C2059: syntax error: '>'
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Game.cpp(19,27): warning C4018: '<': signed/unsigned mismatch
+  GameObject.cpp
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,14): error C3646: 'p': unknown override specifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.cpp(7,46): error C2065: 'p': undeclared identifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.cpp(7,57): error C2065: 'p': undeclared identifier
+  Maze.cpp
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Maze.h(17,11): error C2065: 'Post': undeclared identifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Maze.h(17,16): error C2059: syntax error: '>'
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Post.h(12,1): error C2504: 'GameObject': base class undefined
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,14): error C3646: 'p': unknown override specifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Maze.cpp(18,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Maze.cpp(21,19): error C2039: 'setPosition': is not a member of 'Post'
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Post.h(10): message : see declaration of 'Post'
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Maze.cpp(26,19): error C2039: 'setPosition': is not a member of 'Post'
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Post.h(10): message : see declaration of 'Post'
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Maze.cpp(27,19): error C2039: 'setState': is not a member of 'Post'
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Post.h(10): message : see declaration of 'Post'
+  Player.cpp
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,14): error C3646: 'p': unknown override specifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  Post.cpp
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\Post.h(12,1): error C2504: 'GameObject': base class undefined
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,14): error C3646: 'p': unknown override specifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  Robot.cpp
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,14): error C3646: 'p': unknown override specifier
+C:\Users\AnaCatarinadaSilvaOl\source\repos\FEUP-C++-Trabalho2Prog\FEUP-C++-Trabalho2Prog\GameObject.h(21,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  Generating Code...
