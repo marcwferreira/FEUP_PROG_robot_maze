@@ -17,7 +17,8 @@
 #include "read_rules.h"
 #include "read_times.h"
 #include "maze_choose.h"
-
+#include "maze_name.h"
+#include "Game.h"
 
 int main(){
 
@@ -29,6 +30,7 @@ int main(){
 
     const std::string no_playing = "0";
     const std::string yes_playing = "1";
+    const bool game_file = false;
 
     //variables
     std::string play_again;
@@ -53,15 +55,25 @@ int main(){
             //ask player for maze
             maze_number = maze_choose();
 
-            //load posts
+            //get maze_name
+            maze_selection = maze_name(maze_number, game_file);
 
-            //load robots
-
+            //open file map
+            Game gameplay(maze_selection);
+            gameplay.play();
             //load player
 
             //load map
 
-            //play
+            //start time
+
+            /*
+            do{
+            //play - player movement and robot movement (detect player leave door)
+            }while("this si true");
+            */
+
+            //end time
 
             //ask to save time
 

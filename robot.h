@@ -15,31 +15,32 @@
 #include <algorithm>
 
 //our files
-#include "move_pos.h"
+#include "Move_pos.h"
 
-class robot {
+class Robot {
+    const char alive_robot = 'R';
+    const char dead_robot = 'r';
+
 public:
-    robot(int idset, int row, int col);
-    int getid();
-    char getsymbol(); // get char representation of robot (R if alive, r if dead)
-    int getrow();
-    int getcol();
-    position getposition();
-    bool isalive();
-    void setrow(int x);
-    void setcol(int y);
-    void setposition(const position &pos);
-    void setasdead();
-
+    Robot();
+    Robot(int ID, int row, int col);
+    int getID() const;
+    int getRow() const;
+    int getCol() const;
+    char getSymbol() const; // get char representation of robot (R if alive, r if dead)
+    Position getPosition() const;
+    bool isAlive() const;
+    void setRow(int x);
+    void setCol(int y);
+    void setID(char ID);
+    void setPosition(const Position &pos);
+    void robotMove(Movement delta);
+    void setAsDead();
+    //other methods
 private:
-    static int robotCounter; //used to attribute automatically the id to the robots
     int id;
     int row, col;
     bool alive;
 };
-
-const bool robot_alive = true;
-const char robot_alive_char = 'R';
-const char robot_dead_char = 'r';
 
 #endif

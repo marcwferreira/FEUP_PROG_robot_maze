@@ -12,31 +12,33 @@
 #include <algorithm>
 
 //our files
-#include "post.h"
+#include "Post.h"
+#include "Move_pos.h"
 
-post::post(int rowsel, int colsel, char typesel){
-    row = rowsel;
-    col = colsel;
-    type = typesel;
+//constructor
+Post::Post(int row_input, int col_input, char type_input){
+    row = row_input;
+    col = col_input;
+    type = type_input;
 }
 
-int post::getrow(){
-    return row;
-}
-
-int post::getcol(){
-    return col;
-}
-
-char post::getsymbol(){
-    return type;
-}
-
-bool post::iselectrified(){
-    if(type == electric_post){
+//getter
+int Post::getRow() const {return row;}
+int Post::getCol() const {return col;}
+char Post::getSymbol() const {return type;}
+bool Post::isElectrified() const {
+    if (type == electric){
         return true;
     }
     else{
+        return false;
+    }
+}
+bool Post::isDoor() const {
+    if (type == door) {
+        return true;
+    }
+    else {
         return false;
     }
 }

@@ -14,14 +14,13 @@
 #include <iomanip>
 #include <algorithm>
 
-struct movement
-{
- int drow, dcol; 
+struct Movement{
+    int dRow, dCol; // displacement, taking into account the chosen movement
 };
 
-struct position
-{
- int row, col;
+struct Position{
+    int row, col;
 };
+
 
 #endif

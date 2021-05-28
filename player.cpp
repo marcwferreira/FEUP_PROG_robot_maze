@@ -12,41 +12,44 @@
 #include <algorithm>
 
 //our files
-#include "player.h"
-#include "move_pos.h"
+#include "Player.h"
+#include "Move_pos.h"
 
-player::player(int rowset, int colset, char symbolset){
-    row = rowset;
-    col = colset;
-    symbol = symbolset;
+//constructors
+Player::Player(){
+    row = 0;
+    col = 0;
+    alive = true;
+    symbol = player_alive;
+}
+Player::Player(int row_input, int col_input){
+    row = row_input;
+    col = col_input;
+    alive = true;
+    symbol = player_alive;
 }
 
-int player::getrow(){
-    return row;
+//getters
+int Player::getRow() const {return row;}
+int Player::getCol() const {return col;}
+char Player::getSymbol() const {return symbol;}
+
+//setter
+void Player::setRow(int row_set) {
+    row = row_set;
+}
+void Player::setCol(int col_set) {
+    col = col_set;
 }
 
-int player::getcol(){
-    return col;
-}
 
-char player::getsymbol(){
-    return symbol;
+//functions
+bool Player::isAlive() const {return alive;}
+void Player::setAsDead() {
+    alive = false;
+    symbol = player_dead;
 }
-
-void player::setsymbol(char playersymbol){
-    symbol = playersymbol;
-}
-
-void player::move(movement delta){
-    row = row + delta.drow;
-    col = col + delta.dcol;
-}
-
-bool player::alive(){
-    if (symbol == player_alive){
-        return true;
-    }
-    else{
-        return false;
-    }
+void Player::move(Movement delta){
+    row = row + delta.dRow;
+    col = col + delta.dCol;
 }

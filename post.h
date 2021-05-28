@@ -14,22 +14,22 @@
 #include <iomanip>
 #include <algorithm>
 
-//our files
-#include "move_pos.h"
-
-class post {
-public:
- post(int row, int col, char type);
- int getrow();
- int getcol();
- char getsymbol(); // get char representation of Post
- bool iselectrified(); 
- //other methods
+class Post {
 private:
- int row, col;
- char type; // '*' - electrified; '+'- non-electrified
+    const char electric = '*';
+    const char nonelectric = '+';
+    const char door = 'O';
+public:
+    Post(int row_input, int col_input, char type_input);
+    int getRow() const;
+    int getCol() const;
+    char getSymbol() const; // get char representation of Post
+    bool isElectrified() const; 
+    bool isDoor() const;
+private:
+    int row, col;
+    char type; // '*' - electrified; '+'- non-electrified
 };
 
-const char electric_post = '*';
 
 #endif

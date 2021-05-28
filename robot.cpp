@@ -12,67 +12,65 @@
 #include <algorithm>
 
 //our files
-#include "robot.h"
-#include "move_pos.h"
+#include "Robot.h"
+#include "Move_pos.h"
 
-robot::robot(int idset, int rowset, int colset){
-    id = idset;
-    row = rowset;
-    col = colset;
-    alive = robot_alive;
+//constructor
+Robot::Robot() {
+    row = -1;
+    col = -1;
+    id = -1;
+    alive = true;
+}
+Robot::Robot(int ID, int row_input,int col_input){
+    row = row_input;
+    col = col_input;
+    id = ID;
+    alive = true;
 }
 
-int robot::getid(){
-    return id;
-}
-
-char robot::getsymbol(){
-    if (alive == robot_alive){
-        return robot_alive_char;
+//getters
+int Robot::getID() const { return id; }
+int Robot::getRow() const {return row;}
+int Robot::getCol() const {return col;}
+char Robot::getSymbol() const {
+    if (alive==true){
+        return alive_robot;
     }
     else{
-        return robot_dead_char;
+        return dead_robot;
     }
 }
+Position Robot::getPosition() const {
+    Position robot_return;
+    robot_return.row = row;
+    robot_return.col = col;
+    return robot_return;
+}
+bool Robot::isAlive() const {return alive;}
 
-int robot::getrow(){
-    return row;
+//setter
+void Robot::setRow(int x){
+    row = x;
+}
+void Robot::setCol(int y){
+    col = y;
+}
+void Robot::setID(char ID) {
+    id = ID;
+}
+void Robot::setPosition(const Position &pos){
+    row = pos.row;
+    col = pos.col;
 }
 
-int robot::getcol(){
-    return col;
+//robot movement
+void Robot::robotMove(Movement delta) {
+    row = row + delta.dRow;
+    col = col + delta.dCol;
 }
 
-position robot::getposition(){
-    position robotpos;
-    robotpos.row = row;
-    robotpos.col = col;
-    return robotpos;
-}
-
-bool robot::isalive(){
-    return alive;
-}
-
-void robot::setrow(int x){
-    if(alive == robot_alive){
-        row = x;
-    }
-}
-
-void robot::setcol(int y){
-    if(alive == robot_alive){
-        col = y;
-    }
-}
-
-void robot::setposition(const position &pos){
-    if(alive == robot_alive){
-        row = pos.row;
-        col = pos.col;
-    }
-}
-
-void robot::setasdead(){
+//set robot dead
+void Robot::setAsDead(){
     alive = false;
 }

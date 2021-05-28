@@ -15,23 +15,28 @@
 #include <algorithm>
 
 //our files
-#include "move_pos.h"
+#include "Move_pos.h"
 
-class player {
+class Player {
+    const char player_alive = 'H';
+    const char player_dead = 'h';
+
 public:
-    player(int row, int col, char symbol);
-    int getrow();
-    int getcol();
-    char getsymbol(); 
-    void setsymbol(char playersymbol); 
-    void move(movement delta);
-    bool alive();
+    Player();
+    Player(int row, int col);
+    int getRow() const;
+    int getCol() const;
+    char getSymbol() const;
+    void setRow(int row_set);
+    void setCol(int col_set);
+    bool isAlive() const;
+    void setAsDead();
+    void move(Movement delta);
 private:
-    int row;
-    int col;
+    int row, col;
+    bool alive;
     char symbol;
 };
 
-const char player_alive = 'H';
 
 #endif
