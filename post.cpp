@@ -26,19 +26,18 @@ Post::Post(int row_input, int col_input, char type_input){
 int Post::getRow() const {return row;}
 int Post::getCol() const {return col;}
 char Post::getSymbol() const {return type;}
+
+//setter
+void Post::setType(char type_sel) {
+    type = type_sel;
+}
+
+//functions
 bool Post::isElectrified() const {
     if (type == electric){
         return true;
     }
     else{
-        return false;
-    }
-}
-bool Post::isDoor() const {
-    if (type == door) {
-        return true;
-    }
-    else {
         return false;
     }
 }

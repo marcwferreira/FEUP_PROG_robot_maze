@@ -1,2 +1,4 @@
 Player         -  Time
 ----------------------
+rapaz          -    8s
+Bob the Builde -   12s

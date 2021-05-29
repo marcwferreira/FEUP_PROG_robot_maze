@@ -3,13 +3,15 @@
 *                                   RULES:                                    *
 *                                                                             *
 *     Your objective is to survive inside the maze while robots chase you     *
-*    You win the game if all robots are destroyed and you are still alive     *
+*     You win the game when you leave the maze by passing through a door      *
 *                                                                             *
 *                            'H' is your character                            *
 *               'h' is your character if you die (game over)                  *
-*               '*' is electric walls, if you hit then you die                *
+*               '*' is electric fence, if you hit then you die                *
+*           '+' is a non electric fence, you cannot walk over them            *
 *    'R' is an alive robot, they will chase you, you die if you touch them    *
 *             'r' is a destroyed robot, you cannot walk over them             *
+*                     'O' is a door  (to leave the maze)                      *
 *                                                                             *
 *                Robots are destroyed when they hit a fence or                *
 *                     another robot (alive or destroyed)                      *
@@ -29,10 +31,5 @@
 *                                                                             *
 *              There is time scores for people that win the game              *
 *                                 Good Luck!                                  *
-*                                                                             *
-*                         SELECT ONE OF THE OPTIONS:                          *
-*                   (type the number of the option wanted)                    *
-*                                                                             *
-*                         1- MAIN MENU       0- EXIT                          *
 *                                                                             *
 *******************************************************************************

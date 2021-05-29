@@ -25,12 +25,14 @@ void read_rules(){
             if(!rules_file.is_open()){
                 std::cout << "Rules:" << std::endl;
                 std::cout << "Your objective is to survive inside the maze while robots chase you" << std::endl;
-                std::cout << "You win the game if all robots are destroyed and you are still alive" << std::endl;
+                std::cout << "You win the game when you leave the maze by passing through a door" << std::endl;
                 std::cout << "'H' is your character" << std::endl;
                 std::cout << "'h' is your character if you die (game over)" << std::endl;
-                std::cout << "'*' is electric walls, if you hit then you die" << std::endl;
+                std::cout << "'*' is electric fance, if you hit then you die" << std::endl;
+                std::cout << "'+' is a non electric fence, you cannot walk over them" << std::endl;
                 std::cout << "'R' is an alive robot, they will chase you, you die if you touch them" << std::endl;
                 std::cout << "'r' is a destroyed robot, you cannot walk over them" << std::endl;
+                std::cout << "'O' is a door (to leave the maze)" << std::endl;
                 std::cout << "Robots are destroyed when they hit a fence or another robot (alive or destroyed)" << std::endl;
                 std::cout << "The game works in rounds, you make a movement then the robots" << std::endl;
                 std::cout << "Here is a list of possible movements in a round: " << std::endl;

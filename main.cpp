@@ -19,6 +19,7 @@
 #include "maze_choose.h"
 #include "maze_name.h"
 #include "Game.h"
+#include "player_win.h"
 
 int main(){
 
@@ -27,16 +28,20 @@ int main(){
     const int play_game = 2;
     const int show_times = 3;
     const int exit = 0;
-
     const std::string no_playing = "0";
     const std::string yes_playing = "1";
     const bool game_file = false;
+    const bool check_type_game = false;
+    const int main_menu = 0;
 
     //variables
     std::string play_again;
     int maze_number;
     std::string maze_selection;
+    bool player_has_won;
+    int player_time;
 
+    //repeat loop while player wants to keep playing
     do{
 
         //ask player for for the menu option
@@ -49,33 +54,34 @@ int main(){
             //ask if want to continue playing
             play_again = keep_playing();
         }
-        else if (option == play_game){
-            //game 
-            
-            //ask player for maze
-            maze_number = maze_choose();
+        else if (option == play_game){         
+            //ask player for the maze he wants to play
+            maze_number = maze_choose(check_type_game);
 
-            //get maze_name
-            maze_selection = maze_name(maze_number, game_file);
+            //only start game if player choose a maze (0 is to back)
+            if (maze_number != main_menu) {
+                //get maze_name
+                maze_selection = maze_name(maze_number, game_file);
 
-            //open file map
-            Game gameplay(maze_selection);
-            gameplay.play();
-            //load player
+                //create game object
+                Game gameplay(maze_selection);
+                //start time count
+                auto start = std::chrono::steady_clock::now();
+                //calls game funcion 
+                player_has_won = gameplay.play();
+                //stop time counter
+                auto end = std::chrono::steady_clock::now();
 
-            //load map
-
-            //start time
-
-            /*
-            do{
-            //play - player movement and robot movement (detect player leave door)
-            }while("this si true");
-            */
-
-            //end time
-
-            //ask to save time
+                //ask to save time
+                if (player_has_won) {
+                    player_time = std::chrono::duration_cast<std::chrono::seconds>(end - start).count(); //calculate player time
+                    std::cout << "you won!" << std::endl;
+                    player_win(player_time, maze_number); //function to save the player time in the records
+                }
+                else if (!player_has_won) {
+                    std::cout << "you lost!" << std::endl;
+                }
+            }
 
             //ask if want to continue playing
             play_again = keep_playing();
@@ -88,7 +94,7 @@ int main(){
             play_again = keep_playing();
         }
         else if (option == exit){
-            return 0;
+            play_again = no_playing;//breaks out of the while loop of "playing again"
         }
 
     }while(play_again == yes_playing);

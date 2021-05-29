@@ -17,7 +17,6 @@
 //makes the maze file name
 std::string maze_name(int maze_num, bool winner_file);
 
-//used to check if maze has a number lower than 10
-const int maze_num_check = 10;
+const int maze_num_check = 10; //used to check if maze has a number lower than 10
 
 #endif

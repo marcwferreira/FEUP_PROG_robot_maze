@@ -9,16 +9,16 @@
 #include <vector>
 #include <limits>
 #include <algorithm>
-#include <stdio.h>
+#include <stdio.h> 
 #include <chrono>
 #include <iomanip>
 #include <algorithm>
 
 //Function for the main menu - returns options chosen by the user
-int maze_choose();
+int maze_choose(bool type_of_check);
 
 //constants
 const int main_menu_maze_choose = 0;
-const bool winner_file_yes_maze_choose = true;
+
 
 #endif
