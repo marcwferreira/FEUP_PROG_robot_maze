@@ -15,7 +15,7 @@
 #include "select_option_game.h"
 #include "read_title.h"
 
-//Function for the main menu - returns the option chosen by the user
+//Function for the main menu (opitions selection) - returns the option chosen by the user
 int select_option_game() {
     
     std::string option;//variable to store the user input

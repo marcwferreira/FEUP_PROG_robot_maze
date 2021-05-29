@@ -410,7 +410,7 @@ void Game::robot_movement(int robot_index) {
                 }
             }
         }
-        //robot goes into door
+        //robot goes into gate
         for (unsigned int j = 0; j < gates.size(); j++) {
             if ((gates[j].getRow() == robots[robot_index].getRow() + robot_movement.dRow) && (gates[j].getCol() == robots[robot_index].getCol() + robot_movement.dCol) && !robot_has_moved) {
                 //do nothing (robot cant move to door so it doesnt move)

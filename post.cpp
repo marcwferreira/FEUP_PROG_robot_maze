@@ -33,7 +33,7 @@ void Post::setType(char type_sel) {
 }
 
 //functions
-bool Post::isElectrified() const {
+bool Post::isElectrified() const { //return if normal post or electrified (true if it is)
     if (type == electric){
         return true;
     }

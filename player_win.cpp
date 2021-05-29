@@ -53,7 +53,7 @@ void player_win(int game_time, int maze_num) {
 
         std::string player_name;
 
-        //ask player name also only allow for names up to 15 chars
+        //ask player name, also only allow for names up to 15 chars
         std::cout << "Please choose name to be recorded (name must have a max of 15 character): ";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

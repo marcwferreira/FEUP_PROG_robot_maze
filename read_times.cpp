@@ -16,6 +16,7 @@
 #include "maze_check.h"
 #include "maze_name.h"
 
+//display a winner file to player (he chooses)
 void read_times(){
 
     int maze_num;
@@ -23,7 +24,7 @@ void read_times(){
 
     std::string winner_file_name; //open file to read times
 
-    //ask the player for the maze numbem to show time
+            //ask the player for the maze numbem to show time
             std::cout << "Choose the maze number you wish to see the records (0 for main menu): ";
              do{
                 std::cin >> maze_num;
@@ -42,6 +43,7 @@ void read_times(){
                 }
             }while( std::cin.fail() || maze_not_exist);
 
+            //if different than 0 (which is go to main menu)
             if(maze_num != main_menu_read_times){
                 winner_file_name = maze_name(maze_num, winner_file);
 

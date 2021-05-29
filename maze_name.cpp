@@ -14,6 +14,7 @@
 //our files
 #include "maze_name.h"
 
+//makes the file name to open the map
 std::string maze_name(int maze_num, bool winner_file){
 
     std::string maze;

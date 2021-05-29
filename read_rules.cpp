@@ -14,6 +14,7 @@
 //our files
 #include "read_rules.h"
 
+//display rules to player
 void read_rules(){
 
     std::string rules_read; //var to load rules file

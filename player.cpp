@@ -45,11 +45,11 @@ void Player::setCol(int col_set) {
 
 //functions
 bool Player::isAlive() const {return alive;}
-void Player::setAsDead() {
+void Player::setAsDead() { //set player stat as dead
     alive = false;
     symbol = player_dead;
 }
-void Player::move(Movement delta){
+void Player::move(Movement delta){ //player movement function
     row = row + delta.dRow;
     col = col + delta.dCol;
 }

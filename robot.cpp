@@ -47,7 +47,7 @@ Position Robot::getPosition() const {
     robot_return.col = col;
     return robot_return;
 }
-bool Robot::isAlive() const {return alive;}
+bool Robot::isAlive() const {return alive;} //returns robot condition
 
 //setter
 void Robot::setRow(int x){

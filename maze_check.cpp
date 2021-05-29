@@ -22,6 +22,7 @@ bool maze_check(int maze_num, bool winner_check){
 
     std::string maze;
 
+    //decide if will check a winner file or game file and get the file name
     if(winner_check == false){
         maze = maze_name(maze_num, game_file);
     }
@@ -29,6 +30,7 @@ bool maze_check(int maze_num, bool winner_check){
         maze = maze_name(maze_num, winner_file);
     }
 
+    //tries opening the file (returns true if it can do it)
     std::ifstream mazefile;
     mazefile.open(maze);
     if (mazefile.fail()) {

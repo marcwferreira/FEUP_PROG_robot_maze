@@ -47,6 +47,7 @@ int main(){
         //ask player for for the menu option
         int option = select_option_game();
 
+        //main menu options
         if (option == rules){
             //read the rules
             read_rules();
@@ -97,7 +98,7 @@ int main(){
             play_again = no_playing;//breaks out of the while loop of "playing again"
         }
 
-    }while(play_again == yes_playing);
+    }while(play_again == yes_playing); //loop while player wants to keep playing
 
     return 0;
 }

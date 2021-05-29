@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <algorithm>
 
+//prints the main menu
 void read_title(){
 
     std::string title_line;//for title screen

@@ -24,6 +24,7 @@ std::string keep_playing(){
     std::cout << "1- YES" << std::endl << "0- NO" << std::endl;
     std::cout << "Please select an option: ";
 
+    //loop until valid answer
     do{
         std::cin >> keep_play;
         if(std::cin.eof()){
@@ -36,5 +37,5 @@ std::string keep_playing(){
         }
     }while(keep_play != no_playing & keep_play != yes_playing);
 
-    return keep_play;
+    return keep_play; //return answer
 }
