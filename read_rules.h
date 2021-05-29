@@ -14,7 +14,7 @@
 #include <iomanip>
 #include <algorithm>
 
-//Function for the main menu - returns options chosen by the user
+//display the rules to the user
 void read_rules();
 
 #endif

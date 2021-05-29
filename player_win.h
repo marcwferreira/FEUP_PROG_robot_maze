@@ -14,9 +14,10 @@
 #include <iomanip>
 #include <algorithm>
 
-//Player won - keep the time of his game
+//Player has won, this function asks player to keep the time of his game
 void player_win(int game_time, int maze_num);
 
+//constants
 const std::string save_yes = "1";
 const std::string save_no = "0";
 const int player_name_read = 0;

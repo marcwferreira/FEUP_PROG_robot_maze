@@ -15,6 +15,7 @@
 #include "maze_choose.h"
 #include "maze_check.h"
 
+//get the input from user for a maze number and check if it exists
 int maze_choose(bool type_of_check){
 
     int maze_num;
@@ -31,10 +32,10 @@ int maze_choose(bool type_of_check){
                     break;
                 }
                 else if(std::cin.fail() || maze_not_exist){ 
-                    std::cout << "Not a valid inut or file doens't exist" << std::endl;
-                    std::cout << "please choose the maze number (0 to go back): ";
                     std::cin.clear();
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Not a valid input or file doens't exist" << std::endl;
+                    std::cout << "please choose the maze number (0 to go back): ";
                 }
             }while( std::cin.fail() || maze_not_exist);
 

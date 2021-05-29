@@ -14,7 +14,7 @@
 #include <iomanip>
 #include <algorithm>
 
-//Function for the main menu - returns options chosen by the user
+//Function that ask the player if he wants to continue and go to main menu - returns options chosen by the user
 std::string keep_playing();
 
 //consts

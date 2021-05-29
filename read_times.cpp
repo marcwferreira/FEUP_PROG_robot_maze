@@ -35,7 +35,7 @@ void read_times(){
                     break;
                 }
                 else if(std::cin.fail() || maze_not_exist){
-                    std::cout << "Not a valid inut or maze winners doens't exist" << std::endl;
+                    std::cout << "Not a valid input or maze winners doens't exist" << std::endl;
                     std::cout << "please choose the maze number (0 for main menu): ";
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
@@ -57,9 +57,19 @@ void read_times(){
                 }
                 //if opening the files works it prints its content
                 else {
+
+                    long num_lines_in_file = 0; //use if the file is empyt (only a header)
+                    
                     while (getline(winnerfile, line)) {
                         std::cout << line << std::endl;
+                        num_lines_in_file++;
                     }
+
+                    //if it is an empty list print "EMPTY LIST" after the header of the file
+                    if (num_lines_in_file <= num_of_header_lines) {
+                        std::cout << "      EMPTY LIST      " << std::endl;
+                    }
+
                 } winnerfile.close();
             }
 

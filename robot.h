@@ -18,8 +18,6 @@
 #include "Move_pos.h"
 
 class Robot {
-    const char alive_robot = 'R';
-    const char dead_robot = 'r';
 
 public:
     Robot();
@@ -29,18 +27,22 @@ public:
     int getCol() const;
     char getSymbol() const; // get char representation of robot (R if alive, r if dead)
     Position getPosition() const;
-    bool isAlive() const;
+    bool isAlive() const; //verify if a robot is dead or alive
     void setRow(int x);
     void setCol(int y);
     void setID(char ID);
-    void setPosition(const Position &pos);
+    void setPosition(const Position &pos); //set the position of a robot in the map
     void robotMove(Movement delta);
-    void setAsDead();
+    void setAsDead(); //set the robot as dead
     //other methods
 private:
     int id;
     int row, col;
     bool alive;
 };
+
+//constants
+const char alive_robot = 'R';
+const char dead_robot = 'r';
 
 #endif

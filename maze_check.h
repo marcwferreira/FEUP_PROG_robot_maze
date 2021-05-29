@@ -14,7 +14,7 @@
 #include <iomanip>
 #include <algorithm>
 
-//Function for the main menu - returns options chosen by the user
+//Verifies if the file for a map number exists (or winner file)
 bool maze_check(int maze_num, bool winner_check);
 
 //constants

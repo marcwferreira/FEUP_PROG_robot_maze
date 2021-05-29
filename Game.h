@@ -37,7 +37,7 @@ private:
     bool ask_game_ended(); //function to detect is player win or lose
     void showGameDisplay(); //prints the display
     void player_movement();
-    void robot_movement(int robot_index);
+    void robot_movement(int robot_index); //move the robot of id "robot_index"
 private:
     Maze maze;
     Player player;
@@ -47,6 +47,7 @@ private:
     bool gameWin;
 };
 
+//constants
 const bool game_start_cond = false;
 const bool game_won = true;
 const bool game_lost = false;

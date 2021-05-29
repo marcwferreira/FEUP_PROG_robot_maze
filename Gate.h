@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <algorithm>
 
+//store the gates that exist in the map
 class Gate {
 public:
     Gate(int row_input, int col_input);

@@ -15,6 +15,7 @@
 #include "maze_check.h"
 #include "maze_name.h"
 
+//check if the game file (or winner file if selected) exists
 bool maze_check(int maze_num, bool winner_check){
 
     bool file_exist = false;

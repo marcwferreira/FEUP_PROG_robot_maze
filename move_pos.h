@@ -14,10 +14,12 @@
 #include <iomanip>
 #include <algorithm>
 
+//store info about where a player and a robot is going to move
 struct Movement{
     int dRow, dCol; // displacement, taking into account the chosen movement
 };
 
+//store coordinate info
 struct Position{
     int row, col;
 };

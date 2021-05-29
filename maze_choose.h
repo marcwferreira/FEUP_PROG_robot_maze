@@ -14,7 +14,7 @@
 #include <iomanip>
 #include <algorithm>
 
-//Function for the main menu - returns options chosen by the user
+//Ask the player for a number (pass type check to verify if game or winner file exist (depending on what user is performing) )
 int maze_choose(bool type_of_check);
 
 //constants

@@ -17,9 +17,8 @@
 //our files
 #include "Move_pos.h"
 
+//store the player info
 class Player {
-    const char player_alive = 'H';
-    const char player_dead = 'h';
 
 public:
     Player();
@@ -29,14 +28,18 @@ public:
     char getSymbol() const;
     void setRow(int row_set);
     void setCol(int col_set);
-    bool isAlive() const;
-    void setAsDead();
+    bool isAlive() const; //return if player is alive
+    void setAsDead();   //set the player as dead
     void move(Movement delta);
 private:
     int row, col;
     bool alive;
     char symbol;
 };
+
+//constants
+const char player_alive = 'H';
+const char player_dead = 'h';
 
 
 #endif

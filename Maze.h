@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <algorithm>
 
+//store the maze size
 class Maze {
 public:
     Maze();

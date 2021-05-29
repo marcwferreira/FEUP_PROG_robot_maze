@@ -14,7 +14,7 @@
 #include <iomanip>
 #include <algorithm>
 
-//Function for the main menu - returns options chosen by the user
+//prints title in the display
 void read_title();
 
 #endif

@@ -14,11 +14,12 @@
 #include <iomanip>
 #include <algorithm>
 
-//Function for the main menu - returns options chosen by the user
+//read times of a maze winner file
 void read_times();
 
 //constants
 const int main_menu_read_times = 0;
 const bool winner_file_yes_read_times = true;
+const int num_of_header_lines = 2;
 
 #endif

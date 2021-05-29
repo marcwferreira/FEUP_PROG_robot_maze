@@ -14,10 +14,10 @@
 //our files
 #include "keep_playing.h"
 
-std::string keep_play; //var to store option
-
-//loop until valid option is chosen
+//loop until valid option is chosen (ask the user if he wants to keep playing (goes to main menu) )
 std::string keep_playing(){
+
+    std::string keep_play; //var to store option
 
     //print message
     std::cout << "Do you want to play (1- MAIN MENU or 0- EXIT)?" << std::endl;
