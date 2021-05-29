@@ -134,10 +134,6 @@ void player_win(int game_time, int maze_num) {
             //set true to file_already_existed
             file_already_existed = true;
 
-            for (int i = 0; i < winner_reading.size(); i++) {
-                std::cout << "test: " << winner_reading[i][player_name_read] << " e " << winner_reading[i][player_time_read] << std::endl;
-            }
-
         }  mazefile.close();
 
         //writting the altered data to the winner file if file existed already
