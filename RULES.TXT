@@ -1,0 +1,35 @@
+*******************************************************************************
+*                                                                             *
+*                                   RULES:                                    *
+*                                                                             *
+*     Your objective is to survive inside the maze while robots chase you     *
+*     You win the game when you leave the maze by passing through a door      *
+*                                                                             *
+*                            'H' is your character                            *
+*               'h' is your character if you die (game over)                  *
+*               '*' is electric fence, if you hit then you die                *
+*           '+' is a non electric fence, you cannot walk over them            *
+*    'R' is an alive robot, they will chase you, you die if you touch them    *
+*             'r' is a destroyed robot, you cannot walk over them             *
+*                     'O' is a door  (to leave the maze)                      *
+*                                                                             *
+*                Robots are destroyed when they hit a fence or                *
+*                     another robot (alive or destroyed)                      *
+*                                                                             *
+*        The game works in rounds, you make a movement then the robots        *
+*                                                                             *
+*              Here is a list of possible movements in a round:               *
+*                    'q' or 'Q' : walk up-left (diagonal)                     *
+*                            'w' or 'W' : walk up                             *
+*                    'e' or 'E' : walk up-right (diagonal)                    *
+*                            'a' or 'A' : walk left                           *
+*                    's' or 'S' : stay in place (no movement)                 *
+*                            'd' or 'D' : walk right                          *
+*                    'z' or 'Z' : walk down-left (diagonal)                   *
+*                            'x' or 'X' - walk down                           *
+*                    'c' or 'C' - walk down-right (diagonal)                  *
+*                                                                             *
+*              There is time scores for people that win the game              *
+*                                 Good Luck!                                  *
+*                                                                             *
+*******************************************************************************
